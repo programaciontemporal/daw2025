@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8 - Formulario 3</title>
+    <style>
+        table {
+            border: 3px black solid;
+        }
+
+        body {
+            background-color: #dbcaec;
+        }
+
+        label {
+            font-weight: bold;
+            color: darkblue;
+        }
+        .label{
+            font-weight: normal;
+            color: black;
+        }
+
+        label:hover {
+            color: bisque;
+        }
+
+
+
+        input {
+            border: 0;
+            border-bottom: 1px solid black;
+            background-color: #dbcaec;
+        }
+
+        input:hover {
+            background-color: bisque;
+        }
+
+        input[type="date"] {
+            width: 97%;
+        }
+
+        input[type="submit"] {
+            width: 100px;
+            height: 30px;
+            background-color: white;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border: 1px solid black;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .centrar {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Formularios de registro</h1>
+    <form action="#" method="get">
+        <table>
+            <tr>
+                <td><label for="nombre">Nombre</label></td>
+                <td><input type="text" id="nombre" name="nombre" maxlength="75" /></td>
+                <td><label for="apellidos">Apellidos</label></td>
+                <td><input type="text" id="apellidos" name="apellidos" maxlength="75" /></td>
+                <td><label for="fp">Fecha de nacimiento</label></td>
+                <td><input type="date" id="fp" name="fp"></td>
+            </tr>
+            <tr>
+                <td><label for="pob">Población</label></td>
+                <td><input type="text" id="pob" name="pob" maxlength="50"></td>
+                <td><label for="pro">Provincia</label></td>
+                <td><input type="text" id="pro" name="pro" maxlength="50"></td>
+                <td><label for="cp">Código postal</label></td>
+                <td><input type="text" id="cp" name="cp" maxlength="5"></td>
+            </tr>
+            <tr>
+                <td><label for="tf">Teléfono</label></td>
+                <td><input type="tel" id="tf" name="tf"></td>
+                <td><label for="email">E-mail</label></td>
+                <td><input type="email" id="email" name="email" maxlength="50"></td>
+                <td><label for="pp">Página web personal</label></td>
+                <td><input type="url" id="pp" name="pp" maxlength="150"></td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <input type="checkbox" id="info" name="info" checked="checked" />
+                    <label class="label" for="info">Deseo recibir información sobre novedades y ofertas</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <input type="checkbox" id="condiciones" name="condiciones" />
+                    <label class="label" for="condiciones">Declaro haber leido y aceptar las condiciones generales del programa y la normativa sobre protección de datos</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" class="centrar"><input type="submit" value="Enviar" /></td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+
+</html>

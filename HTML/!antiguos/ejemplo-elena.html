@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario recogida de datos</title>
+    <!--Definición de estilos -->
+    <style>
+        .tr-fila {
+            float: left;
+            width: 100%;
+            height: 30px;
+
+        }
+
+        .td-etiqueta {
+            float: left;
+            width: 15%;
+            height: 30px;
+            border: 1px solid black;
+        }
+
+        .td-datos {
+            float: left;
+            width: 84%;
+            height: 30px;
+            border: 1px solid black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <form method="get" action="#">
+        <div class="tr-fila">
+            <div class="td-etiqueta">
+                <label for="fecha">Fecha</label>
+            </div>
+            <div class="td-datos">
+                <input type="date" name="fecha" placeholder="Fecha">
+            </div>
+        </div>
+        <div class="tr-fila">
+            <div class="td-etiqueta"><label for="tiempo">Tiempo</label></div>
+            <div class="td-datos"><input type="time" name="tiempo" placeholder="Tiempo"></div>
+        </div>
+
+
+        <br><br><br><br><br>
+
+        <p>
+            <label for="fechayhora">Fecha y hora</label>
+            <input type="datetime" name="fechayhora" placeholder="Fecha y Hora">
+        </p>
+        <p>
+            <label for="mes">Mes</label>
+            <input type="month" name="mes" placeholder="Mes">
+        </p>
+        <p>
+            <label for="semana">Semana</label>
+            <input type="week" name="semana" placeholder="Semana">
+        </p>
+        <p>
+            <label for="numero">Número</label>
+            <input type="number" name="numero" placeholder="Número" min="-10" max="10">
+        </p>
+        <p>
+            <label for="telefono">Teléfono</label>
+            <input type="tel" name="telefono" placeholder="Teléfono">
+        </p>
+        <p>
+            <label for="buscador">Búsqueda</label>
+            <input type="search" name="buscador">
+        </p>
+        <p>
+            <label for="color">Color Favorito</label>
+            <input type="color" name="color">
+        </p>
+        <p>
+            <input type="reset" value="Borrar" name="borrar">
+            <input type="submit" value="Enviar" name="envio">
+        </p>
+    </form>
+</body>
+
+</html>

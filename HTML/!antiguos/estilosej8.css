@@ -1,0 +1,45 @@
+/* Estilos para el ejercicio 8 */
+
+body {
+    color: #0000FF;
+    background-color: #CCFFCC;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15px;
+}
+
+h1 {
+    color: #FF0000;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 45;
+}
+
+h2 {
+    color: #AA0000;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+}
+
+h3 {
+    color: #770000;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+}
+
+li::marker {
+    color: #000000;
+}
+
+.datos {
+    color: #006600;
+}
+
+.resalto {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.textoblanco {
+    color: #FFFFFF;
+    background: #000000;
+    font-style: italic;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="js/jquery-ui.min.css">
+    <link rel="stylesheet" href="js/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="js/jquery-ui.theme.min.css">
+    <title>JQuery</title>
+</head>
+
+<body>
+    <button id="btn">Cambiar texto del h1 de arriba</button>
+    <h1 id="titulo">cosa de título</h1>
+    <div id="miDiv">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit adipisci maiores aspernatur quaerat nobis
+            voluptatibus similique tenetur rem vel natus. Dolor doloremque animi facere eos corrupti labore pariatur
+            nulla deleniti!
+        </p>
+        <input type="text">
+    </div>
+
+
+
+
+
+
+    <script>
+        $(function () {
+            console.log("El DOM está listo.");
+
+            $("#titulo").click(function () {
+                $(this).css("background-color", "yellow");
+            });
+
+            $("input").focus(function () {
+                $(this).css("background-color", "#cccccc");
+            });
+
+            $("input").blur(function () {
+                $(this).css("background-color", "#000");
+            });
+            $("#btn").click(function () {
+                $("#miDiv").blur(function () {
+                    $(this).css("background-color", "#000");
+                })
+            })
+
+            $("p").on({
+                mouseenter: function () {
+                    $(this).css("background-color", "lightgray");
+                },
+                mouseleave: function () {
+                    $(this).css("background-color", "lightblue");
+                },
+                click: function () {
+                    $(this).css("background-color", "yellow");
+                }
+            });
+
+            /*
+            $("#btn").click(function () {
+                $("#miDiv").toggle();
+            });
+            */
+            /*
+            $("#btn").click(function () {
+                $("#miDiv").load("https://www.pccomponentes.com/"); // no funciona
+            });
+            */
+
+        });
+
+        /*
+        let bt = document.getElementById("btn");
+        bt.addEventListener("click", () => {
+            $("#titulo").text("Hola, jQuery!");
+        });
+        */
+        /*
+        $("#btn").click(function () {
+            $("#titulo").text("Hola, jQuery!");
+        });
+        */
+        /*
+        $("#titulo").hover(
+            function () {
+                $(this).css("color", "red");
+            },
+            function () {
+                $(this).css("color", "black");
+            }
+        );
+        */
+        /*
+        $("#btn").click(function () {
+            // $("#titulo").toggle();
+            //$("#titulo").fadeToggle(); // Alterna
+            //$("#titulo").slideToggle(); // Alterna
+            //$("#titulo").animate({ opacity: 0.1, top: "+=100px" }, 100); // no se mueve ni top ni left
+        });
+        */
+
+    </script>
+</body>
+
+</html>

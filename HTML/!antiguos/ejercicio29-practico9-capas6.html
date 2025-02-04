@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p {
+            text-align: center;
+        }
+        div {
+            border: 1px solid black;
+        }
+
+        #centrado-relative{
+            position: relative;
+            margin: 0 auto;
+            width: 200px;
+        }
+
+        #centrado-absoluto{
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 200px;
+            background-color: bisque;
+        }
+
+        /* cambio el 0 por 100px para que se vea */
+        #centrado-estatico{
+            margin: 100px auto;
+            width: 150px;
+            background-color: azure;
+        }
+
+        #contenedor {
+            position: relative;
+            height: 300px;
+            width: 300px;
+            background-color: green;
+        }
+        #centrado-contenedor{
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 200px;
+            background-color: bisque;
+        }
+
+        #centradoVH{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            height: 100px;
+            width: 100px;
+            background-color: aquamarine;
+        }
+
+        #centrado-contenedor-vh{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            height: 100px;
+            width: 100px;
+            background-color: cadetblue;
+        }
+    </style>
+</head>
+
+<body>
+<div id="centrado-relative"><p>Esto es un DIV centrado con <i>position: relative</i></p></div>
+
+<div id="centrado-absoluto"><p>Esto e s un DIV centrado con <i>position: absolute</i></p></div>
+
+<div id="centrado-estatico"><p>Esto e s un DIV centrado con <i>position: static</i>(o sin especificar, que es por defecto)</p></div>
+
+<div id="contenedor">
+    <div id="centrado-contenedor"><p>Esto es un DIV dentro de otro DIV y este último centrado con el primer DIV horizontalmente</p></div>
+</div>
+
+<div id="centradoVH">Esto es un DIV centrado horizontal y verticalmente en la página</div>
+
+<div id="contenedor">
+    <div id="centrado-contenedor-vh"><p>Esto es un DIV dentro de otro DIV y este último centrado con el primer DIV horizontal y verticalmente</p></div>
+</div>
+
+</body>
+
+</html>

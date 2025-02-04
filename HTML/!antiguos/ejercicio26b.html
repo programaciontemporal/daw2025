@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8 - Formulario</title>
+
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: small;
+        }
+        table {
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        td {
+            vertical-align: middle;
+            padding-top: 5px;
+        }
+
+        hr{
+            border: 0;
+            border-top: 1px solid black;
+        }
+
+        input {
+            border: 1px solid #eee;
+            background-color: #eee;
+            width: 150px;
+            padding: 1;
+            margin: 0;
+        }
+
+        input:hover {
+            border: 1px solid black;
+            background-color: white;
+            font-weight: bold;
+        }
+
+        #direccion {
+            width: 99.3%;
+        }
+
+        #separacion1 {
+            border-top: 1px solid black;
+        }
+        #separacion2 {
+            border-bottom: 1px solid black;
+        }
+
+        .centrar{
+            text-align: center;
+        }
+        input[type=submit]{
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        Nombre y apellidos (máximo 75 caracteres)
+        Dirección (máximo 125 caracteres)
+        Población (máximo 50 caracteres)
+        Provincia (máximo 50 caracteres)
+        CP (máximo 5 caracteres)
+        Teléfono (su tipo correcto)
+        E-mail (su tipo correcto)
+        Fecha de nacimiento (su tipo correcto)
+        Página web personal (su tipo correcto)
+    -->
+
+    <h1>Formulario de registro</h1>
+    <form method="get" action="#">
+        <table>
+            <tr>
+                <td colspan="6"><hr></td>
+            </tr>
+
+            <tr>
+                <td><label for="nombre">Nombre: </label></td>
+                <td><input type="text" placeholder="Nombre" name="nombre" id="nombre" maxlength="35"></td>
+                <td><label for="apellidos">Apellidos: </label></td>
+                <td><input type="text" placeholder="Apellidos" name="apellidos" id="apellidos" maxlength="75"></td>
+                <td><label for="fecha">Fecha de nacimiento: </label></td>
+                <td><input type="date" placeholder="DD/MM/AAAA" name="fecha" id="fecha"></td>
+            </tr>
+
+            <tr>
+                <td colspan="6"><hr></td>
+            </tr>
+
+            <tr>
+                <td><label for="direccion">Dirección: </label></td>
+                <td colspan="5"><input type="text" placeholder="C/ Falsa, 123" name="direccion" id="direccion"
+                        maxlength="125"></td>
+            </tr>
+
+            <tr>
+                <td><label for="poblacion">Poblacion: </label></td>
+                <td><input type="text" placeholder="Población" name="poblacion" id="poblacion" maxlength="50"></td>
+                <td><label for="provincia">Provincia: </label></td>
+                <td><input type="text" placeholder="Provincia" name="provincia" id="provincia" maxlength="50"></td>
+                <td><label for="cp">Código postal: </label></td>
+                <td><input type="text" placeholder="12345" name="cp" id="cp" maxlength="5"></td>
+            </tr>
+
+            <tr>
+                <td colspan="6"><hr></htr></td>
+            </tr>
+
+            <tr>
+                <td><label for="tlf">Teléfono: </label></td>
+                <td><input type="tel" placeholder="123456789" name="tlf" id="tlf" maxlength="9"></td>
+                <td><label for="email">e-Mail: </label></td>
+                <td><input type="email" name="email" id="email" placeholder="correo@servidor.com" maxlength="50"></td>
+                <td><label for="URL">Págia web personal </label></td>
+                <td><input type="url" placeholder="www.mipagina.com" name="URL" id="URL" maxlength="150"></td>
+            </tr>
+
+            <tr>
+                <td colspan="6"><hr></htr></td>
+            </tr>
+
+            <tr>
+                <td colspan="6" class="centrar"><input type="submit" id="enviar" name="enviar" value="Registrarse"></td>
+            </tr>
+
+            <tr>
+                <td colspan="6"><hr></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

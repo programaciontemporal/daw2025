@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctico 10</title>
+
+    <style>
+        /* Capa contenedora de todo */
+        #contenedor {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: auto;
+            border: 1px solid fuchsia;
+        }
+
+        #cabecera,
+        #navegacion {
+            margin: 10px;
+            border: 1px solid #29b870;
+        }
+
+        #contenidos {
+            margin: 10px;
+            border: 1px solid black;
+        }
+
+        #articulo {
+            margin: 10px;
+            border: 1px solid black;
+        }
+
+        footer {
+            margin: 10px;
+            border: 1px solid red;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: green;
+        }
+
+        a:visited {
+            text-decoration: dotted;
+            color: blueviolet;
+        }
+
+        .classfooter {
+            margin: 10px;
+            border: 1px solid red;
+        }
+
+        .classvolver {
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- **********************    CABECERA    ********************** -->
+    <div id="contenedor">
+        <div id="cabecera">
+            <div id="logo">
+                <img src="img/logo.png" alt="">
+                <p>Teléfono: 666 33 66 99</p>
+            </div>
+
+            <div id="navegacion">
+                <ul>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!-- *******************    CONTENIDOS    ******************** -->
+        <div id="contenidos">
+            <div id="articulo">
+                <h1>Esto es un H1</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, massa in malesuada imperdiet, arcu libero faucibus purus, a tristique odio lectus at sapien. Vestibulum scelerisque lorem et enim lobortis ultricies vel eget risus. Phasellus rutrum velit purus, lobortis interdum leo mattis eu. Vestibulum at condimentum felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris at velit sollicitudin, sodales orci in, feugiat augue. Nulla sodales sed elit eget maximus. Suspendisse sodales semper dolor eu venenatis. Nunc lacus risus, luctus sit amet molestie at, semper eget libero. Cras tristique semper metus ut suscipit.
+                </p>
+            </div>
+            <div id="articulo">
+                <h1>Esto es otro H1</h1>
+                <div>
+                    <p>
+                        Fusce ullamcorper, arcu eu porttitor iaculis, odio elit suscipit tortor, eget euismod urna est id mauris. Mauris placerat libero nibh, vitae porttitor eros luctus luctus. Pellentesque mollis elit sed malesuada cursus. Integer eu nunc laoreet dui feugiat accumsan. Morbi sit amet aliquet massa. Ut interdum lectus a vehicula molestie. In id porta libero. Nunc id urna erat. Nunc vehicula, nibh vitae mattis porttitor, ex nibh aliquam nunc, tempus facilisis ex nisi vitae quam.
+                    </p>
+                    <p><a
+                            href="https://www.pexels.com/es-es/video/ciclista-pasando-por-la-historica-catedral-de-amberes-29838041/">Fuente
+                            del vídeo</a></p>
+                </div>
+                <div>
+                    <video controls>
+                        <source src="vid/video.mp4" type="video/mp4">
+                        Tú navegador no soporta la etiqueta "Vídeo"
+                    </video>
+                </div>
+            </div>
+            <div id="articulo">
+                <h1>Y aquí va otro H1</h1>
+                <audio controls>
+                    <source src="aud/sonido.mp3" type="audio/mpeg">
+                    Tú navegador no soporta la etiqueta "Audio"
+                </audio>
+                <div>
+                    <p>
+                        Fusce ullamcorper, arcu eu porttitor iaculis, odio elit suscipit tortor, eget euismod urna est id mauris. Mauris placerat libero nibh, vitae porttitor eros luctus luctus. Pellentesque mollis elit sed malesuada cursus. Integer eu nunc laoreet dui feugiat accumsan. Morbi sit amet aliquet massa. Ut interdum lectus a vehicula molestie. In id porta libero. Nunc id urna erat. Nunc vehicula, nibh vitae mattis porttitor, ex nibh aliquam nunc, tempus facilisis ex nisi vitae quam.
+                    </p>
+                    <p><a
+                            href="https://pixabay.com/es/music/late-vlog-music-beat-trailer-showreel-promo-background-intro-theme-274290/">Fuente
+                            del audio</a></p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- *******************    FOOTER    ******************** -->
+        <footer id="footer">
+            <div class="classfooter">
+                <h3>Sobre mí</h3>
+                <p>
+                    Sed et ligula mi. Suspendisse sollicitudin libero vel gravida ullamcorper. Ut semper quis leo quis fringilla. Curabitur lobortis eleifend dui, et ultrices lorem gravida in. Maecenas commodo nibh enim, in semper tellus ornare a. Nulla non pharetra lorem, non sollicitudin est. Curabitur scelerisque mi dictum tempus viverra. Vivamus tristique nisl vitae laoreet hendrerit. Praesent euismod, sapien id viverra ultricies, nisl risus suscipit lacus, a vulputate eros erat at neque. Vivamus eu enim ac mauris hendrerit aliquam et at ipsum.
+                </p>
+            </div>
+            <div class="classfooter">
+                <h3>Horarios</h3>
+                <p>
+                    Mañanas de 9:00 a 13:00<br>
+                    Tardes de 16:00 a 19:00<br>
+                    Domingos cerrado
+                </p>
+            </div>
+            <div class="classfooter">
+                <img src="img/300100.jpg" alt="Imágen en el footer 1">
+                <img src="img/300100.jpg" alt="Imágen en el footer 2">
+            </div>
+        </footer>
+        <p class="classvolver"><a href="#cabecera">Volver a inicio</a></p>
+    </div>
+</body>
+
+</html>

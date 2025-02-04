@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>..:: Contact ::..</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+    <!-- cabecera -->
+    <header>
+        <img src="img/logo.png" alt="logotipo oasis">
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Technology Solutions</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Strategic Partners</a></li>
+            <li><a href="contacto.html">Contact</a></li>
+            <li><a href="#">Jobs</a></li>
+        </ul>
+    </nav>
+
+    <!-- formulario -->
+    <div id="formulario">
+
+        <h1>Formulario de contacto</h1>
+        <h3>Escríbenos y en breve los pondremos en contacto contigo</h3>
+        <form action="#" method="get">
+            <div class="row">
+                <div class="celda-label"><label for="nombre" class="colocar_nombre">Nombre <span class="obligatorio">*</span></label></div>
+                <div class="celda-datos"><input type="text" name="introducir_nombre" id="nombre" required="obligatorio" placeholder="Escribe tu nombre"></div>
+            </div>
+
+            <div class="row">
+                <div class="celda-label"><label for="email">Email <span class="obligatorio">*</span></label></div>
+                <div class="celda-datos"><input type="email" name="email" id="email" required="obligatorio" placeholder="Escribe tu Email"></div>
+            </div>
+
+            <div class="row">
+                <div class="celda-label"><label for="tel">Teléfono </label></div>
+                <div class="celda-datos"><input type="tel" name="tel" id="tel" placeholder="Escribe tu teléfono"></div>
+            </div>
+            
+            <div class="row">
+                <div class="celda-label"><label for="web">Sitio web </label></div>
+                <div class="celda-datos"><input type="url" name="web" id="web" placeholder="Escribe la URL de tu web"></div>
+            </div>
+
+            <div class="row">
+                <div class="celda-label"><label for="asunto">Asunto <span class="obligatorio">*</span> </label></div>
+                <div class="celda-datos"><input type="text" name="asunto" id="asunto" required="obligatorio" placeholder="Escribe un asunto"></div>
+            </div>
+
+            <div class="row">
+                <div class="celda-label"><label for="mensaje">Mensaje <span class="obligatorio">*</span> </label></div>
+                <div class="celda-datos"><textarea name="mensaje" id="mensaje" required="obligatorio" placeholder="Deja aquí tu comentario..."></textarea></div>
+            </div class="row">
+
+            <div class="row row-boton"><button type="submit" name="enviar" id="enviar">Enviar comentario</button></div>
+
+            <div class="row">
+                <p class="aviso">
+                    <span class="obligatorio"> * </span>los campos son obligatorios.
+                </p>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- footer -->
+    <div id="divisor"></div>
+    <footer>
+
+        <span id="creado">Designed by <a href="#">Sitecreative</a></span>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Technology Solutions</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Strategic Partners</a></li>
+            <li><a href="contacto.html">Contact</a></li>
+            <li><a href="#">Jobs</a></li>
+        </ul>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /* con relative no funciona, a no ser que se cambie bottom por top */
+        /* con absolute si funciona */
+        div {
+            border: 1px solid black;
+        }
+        #dog1 {
+            position: relative;
+            left: 350px;
+            bottom: 150px;
+            background-color: red;
+        }
+
+        #dog2 {
+            position: relative;
+            left: 150px;
+            bottom: 500px;
+            background-color: green;
+        }
+
+        #dog3 {
+            position: relative;
+            left: 50px;
+            bottom: 700px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dog1">cosa 1</div>
+    <div id="dog2">cosa 2</div>
+    <div id="dog3">cosa 3</div>
+
+</body>
+
+</html>

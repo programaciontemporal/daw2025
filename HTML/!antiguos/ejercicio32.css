@@ -1,0 +1,94 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#contenedor {
+    position: relative;
+    width: 100%;
+}
+
+.divTable {
+    display: table;
+    margin: 0 auto;
+}
+
+.divTableRow {
+    display: table-row;
+}
+
+.divTableCell {
+    border-bottom: 1px dotted #999999;
+    display: table-cell;
+    padding: 2px;
+    vertical-align: middle;
+}
+
+.cellbutton {
+    text-align: center;
+    padding-top: 10px;
+    display: table-cell;
+    width: 50%;
+}
+
+input[type=button], input[type=submit] {
+    width: 100px;
+}
+
+/* 
+
+#contenido {
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 25%;
+}
+
+#row {
+    position: relative;
+    float: left;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5px;
+    display: block;
+}
+
+#cell1 {
+    display: block;
+    float: left;
+    width: 20%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+#cell2 {
+    display: table-cell;
+    float: left;
+    width: auto;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+
+#cellbutton {
+    text-align: center;
+    float: left;
+    width: 50%;
+    vertical-align: middle;
+}
+
+
+
+input[type=datetime-local],
+input[type=time],
+input[type=month],
+input[type=week],
+input[type=number],
+input[type=text],
+input[type=search] {
+    border: 0;
+    border-bottom: 1px dashed gray;
+}
+
+input[type=color]{
+    width: 50%;
+} */

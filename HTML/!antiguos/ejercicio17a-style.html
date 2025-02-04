@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 17a (Práctico 4)</title>
+    <style>
+        .lista1 {
+            font-family: 'Courier New', Courier, monospace;
+            color: red;
+            list-style-type: lower-alpha;
+        }
+
+        .lista2 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: blueviolet;
+            list-style-type: decimal;
+        }
+
+        .lista3 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: coral;
+            list-style-type: lower-roman;
+            padding-left: 50px;
+            width: 50%;
+        }
+
+        .lista3 li {
+            border: black dotted 1px;
+        }
+
+        .lista4 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: darkslategray;
+            list-style-type: disc;
+        }
+
+        .lista5 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: cyan;
+            list-style-type: circle;
+        }
+
+        .lista6 {
+            font-family: 'Times New Roman', Times, serif;
+            color: gold;
+            list-style-type: square;
+        }
+
+        .lista7 {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            list-style-type: none;
+        }
+
+        .lista7 li {
+            color: white;
+            -webkit-text-stroke: 0.5px black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Listas ordenadas</h1>
+
+    <h4>Comienzo de la lista en un número o letra diferente a 1 o A</h4>
+    <ol class="lista1" start="5">
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 4</li>
+    </ol>
+
+    <h4>Lista en reversa comenzando en 100</h4>
+    <ol class="lista2" start="100" reversed>
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 4</li>
+    </ol>
+
+    <h4>Lista en números romanos (en minúscula) comenzando por 999</h4>
+    <ol class="lista3" start="999">
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 4</li>
+    </ol>
+
+    <h1>Listas no ordenadas</h1>
+
+    <h4>Viñeta círculo con relleno</h4>
+    <ul class="lista4">
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 4</li>
+    </ul>
+
+    <h4>Viñeta círculo sin relleno</h4>
+    <ul class="lista5">
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 4</li>
+    </ul>
+
+    <h4>Viñeta cuadrada</h4>
+    <ul class="lista6">
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 4</li>
+    </ul>
+
+    <h4>Sin viñeta</h4>
+    <ul class="lista7">
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 4</li>
+    </ul>
+
+</body>
+
+</html>

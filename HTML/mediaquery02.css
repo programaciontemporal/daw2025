@@ -1,0 +1,59 @@
+span {
+    color: blue;
+}
+@media (min-width: 1201px) {
+
+    .datos,
+    .estudios,
+    .experiencia {
+        float: left;
+        width: 33%;
+    }
+
+    h2 {
+        font-size: larger;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1200px) {
+    .datos {
+        float: left;
+        width: 100%;
+    }
+
+    .estudios,
+    .experiencia {
+        float: left;
+        width: 50%;
+    }
+    h2 {
+        font-size: large;
+    }
+}
+
+ 
+@media (max-width: 600px) {
+    h2 {
+        border-bottom: 1px solid black;
+    }
+
+    ul , li {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .datos,
+    .estudios,
+    .experiencia {
+        width: 100%;
+    }
+    h2 {
+        font-size: medium;
+    }
+}
+
+@media (max-width: 490px) {
+    h1 {
+        font-size: large;
+    }
+}

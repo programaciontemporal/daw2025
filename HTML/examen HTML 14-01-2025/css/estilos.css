@@ -1,0 +1,186 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0 auto;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#contenedor {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#header {
+    width: 100%;
+    margin: 0 auto;
+    border-top: 1px dotted gray;
+    border-bottom: 1px dotted gray;
+}
+
+#img {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+
+
+
+/* Navegador de los dos botones */
+#navegador {
+    text-align: center;
+    padding-top: 20px;
+    height: 50px;
+}
+
+#navegador nav ul,
+#navegador nav li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+#navegador a {
+    border-radius: 4px;
+    padding: 10px;
+}
+
+/* Navegador de artículos */
+#navega-articulos {
+    width: 100%;
+    text-align: center;
+}
+
+#navega-articulos nav ul,
+#navega-articulos nav li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+#navega-articulos a {
+    padding: 0 5px 0 5px;
+    border-radius: 4px;
+}
+
+
+#navegador a,
+#navega-articulos a {
+    text-decoration: none;
+    color: white;
+    background-color: #4CB050;
+}
+
+#navegador a:hover,
+#navega-articulos a:hover {
+    color: #4CB050;
+    background-color: white;
+    border: 1px solid #4CB050;
+}
+
+#contenidos {
+    width: 100%;
+}
+
+.titulo {
+    width: 100%;
+    text-align: center;
+}
+
+.informacion {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#articulos {
+    float: left;
+    width: 70%;
+}
+
+#aside {
+    float: right;
+    width: 29%;
+    background-color: lightgray;
+
+}
+
+.noticias {
+    width: 95%;
+}
+
+.bloque {
+    border-top: 1px dotted gray;
+    width: 100%;
+    text-align: justify;
+}
+
+.foto {
+    float: left;
+}
+
+
+
+/* Estilos para el formulario */
+
+#formulario {
+    width: 75%;
+    margin: 0 auto;
+}
+
+input,
+select {
+    border: 1px solid gray;
+    background: none;
+    box-shadow: none;
+    border-radius: 4px;
+    font-size: large;
+    width: 100%;
+    padding: 10px;
+    display: block;
+}
+
+input[type="button"],
+input[type="submit"] {
+    border: none;
+    color: white;
+    background-color: #4CB050;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover {
+    color: #4CB050;
+    background-color: white;
+    border: 1px solid #4CB050;
+}
+
+
+.row {
+    font-size: large;
+    width: 100%;
+}
+
+.cell {
+    width: 100%;
+    float: left;
+    padding-bottom: 10px;
+
+}
+
+.boton-enviar {
+    width: 48%;
+    float: left;
+    ;
+}
+
+.boton-borrar {
+    width: 48%;
+    float: right;
+}

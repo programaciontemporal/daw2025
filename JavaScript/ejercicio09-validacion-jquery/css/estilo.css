@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
+.clase1,
+.claseNegro {
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+}
+
+.clase2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: green;
+}
+
+.claseRojo {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: red;
+
+}
+
+.oculto {
+    visibility: hidden;
+}
+
+.error {
+    color: red;
+    display: none;
+}

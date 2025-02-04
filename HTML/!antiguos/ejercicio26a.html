@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8 - Formulario</title>
+</head>
+
+<body>
+    <!-- 
+        Nombre y apellidos (máximo 75 caracteres)
+        Dirección (máximo 125 caracteres)
+        Población (máximo 50 caracteres)
+        Provincia (máximo 50 caracteres)
+        CP (máximo 5 caracteres)
+        Teléfono (su tipo correcto)
+        E-mail (su tipo correcto)
+        Fecha de nacimiento (su tipo correcto)
+        Página web personal (su tipo correcto)
+    -->
+
+    <h1>Formulario de registro</h1>
+    <form method="get" action="#">
+        <p>
+            <label for="nombre">Nombre: </label>
+            <input type="text" placeholder="Nombre" name="nombre" id="nombre" maxlength="35">
+        </p>
+        <p>
+            <label for="nombre">Apellidos: </label>
+            <input type="text" placeholder="Apellidos" name="nombre" id="nombre" maxlength="75">
+        </p>
+        <p>
+            <label for="direccion">Dirección: </label>
+            <input type="text" placeholder="C/ Falsa, 123" name="direccion" id="direccion" maxlength="125">
+        </p>
+        <p>
+            <label for="poblacion">Poblacion: </label>
+            <input type="text" placeholder="Población" name="poblacion" id="poblacion" maxlength="50">
+        </p>
+        <p>
+            <label for="provincia">Provincia: </label>
+            <input type="text" placeholder="Provincia" name="provincia" id="provincia" maxlength="50">
+        </p>
+        <p>
+            <label for="cp">Código postal: </label>
+            <input type="text" placeholder="12345" name="cp" id="cp" maxlength="5">
+        </p>
+        <p>
+            <label for="tlf">Teléfono: </label>
+            <input type="tel" placeholder="123456789" name="tlf" id="tlf" maxlength="9">
+        </p>
+        <p>
+            <label for="email">e-Mail: </label>
+            <input type="email" name="email" id="email" placeholder="correo@servidor.com" maxlength="50">
+        </p>
+        <p>
+            <label for="fecha">Fecha de nacimiento: </label>
+            <input type="date" placeholder="DD/MM/AAAA" name="fecha" id="fecha">
+        </p>
+        <p>
+            <label for="URL">Págia web personal </label>
+            <input type="url" placeholder="www.mipagina.com" name="URL" id="URL" maxlength="150">
+        </p>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+/* Vintage Style CSS */
+
+body {
+    background-color: #f4f1ea;
+    color: #5b4636;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Georgia', serif;
+    color: #3e2723;
+}
+
+a {
+    color: #8d6e63;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #5d4037;
+    text-decoration: underline;
+}
+
+header, footer {
+    background-color: #d7ccc8;
+    color: #3e2723;
+    padding: 20px;
+    text-align: center;
+}
+
+button {
+    background-color: #a1887f;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #8d6e63;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #d7ccc8;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    font-family: 'Georgia', serif;
+    color: #5b4636;
+}
+
+.card p {
+    font-family: 'Courier New', Courier, monospace;
+    color: #5b4636;
+}

@@ -1,0 +1,192 @@
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 100px;
+}
+
+article {
+    text-align: justify;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0px 10px 0px;
+}
+
+nav a {
+    color: blue;
+    padding: 0 20px 0 0;
+    text-transform: uppercase;
+    text-decoration-thickness: 2px;
+}
+
+nav a:hover {
+    color: #000000;
+}
+
+nav a:active,
+nav a:focus {
+    text-decoration-color: violet;
+}
+
+nav ul {
+    width: 100%;
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+#slider {
+    img {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+}
+
+main,
+#formulario {
+    width: 78%;
+    float: left;
+}
+
+aside {
+    width: 20%;
+    float: right;
+}
+
+.laterales {
+    margin-bottom: 10px;
+    border: 4px solid #FEFF03;
+    background-color: #F7FDA3;
+    padding: 10px
+}
+
+.laterales h2 {
+    color: blue;
+}
+
+#creado {
+    float: right;
+    padding: 10px 0px 20px 0px;
+    margin-right: 10px;
+}
+
+#divisor {
+    clear: both;
+    border-top: 4px solid blue;
+    padding-bottom: 10px;
+
+}
+
+footer {
+    clear: both;
+    background: #DADADA;
+    width: 100%;
+    font-size: 80%;
+    text-align: left;
+    padding: 20px 0px 20px 0px;
+}
+
+footer ul {
+    margin: 0;
+    padding: 10px;
+}
+
+footer li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline;
+}
+
+footer a {
+    color: #000000;
+    font-weight: bold;
+    padding: 0 5px 0 0;
+    text-decoration: underline;
+    text-decoration-color: blue;
+    text-decoration-thickness: 1px;
+}
+
+footer a:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+/* formulario */
+
+#formulario {
+    width: 100%;
+}
+
+.row {
+    width: 100%;
+    clear: both;
+}
+
+.row-boton {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.celda-label {
+    float: left;
+    width: 20%;
+}
+
+.celda-datos {
+    float: left;
+    width: 75%;
+}
+
+.obligatorio {
+    color: blue;
+    font-weight: bold;
+}
+
+.aviso {
+    font-weight: bold;
+    font-style: italic;
+    font-size: small;
+}
+
+
+input,
+textarea {
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid blue;
+}
+
+button {
+    width: 200px;
+    height: 30px;
+    background: none;
+    outline: none;
+    border: 1px solid blue;
+}
+
+button:hover {
+    background-color: blue;
+    color: whit;
+}
+
+textarea {
+    height: 6em;
+}
