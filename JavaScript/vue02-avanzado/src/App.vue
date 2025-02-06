@@ -1,10 +1,13 @@
 <script setup>
+import CestaCompra from './components/CestaCompra.vue';
+import ColorRaton from './components/ColorRaton.vue';
 import ConversorTemperatura from './components/ConversorTemperatura.vue';
 import FiltroListaCompra from './components/FiltroListaCompra.vue';
 import FormularioRegistro from './components/FormularioRegistro.vue';
 import ListaCompra from './components/ListaCompra.vue';
-
-
+import ListaTareasPendientes from './components/ListaTareasPendientes.vue';
+import RecetasDetalles from './components/RecetasDetalles.vue';
+import ResaltarTexto from './components/ResaltarTexto.vue';
 </script>
 
 <template>
@@ -27,6 +30,26 @@ import ListaCompra from './components/ListaCompra.vue';
 
       <!-- Ejercicios 14 - Filtro lista de productos -->
       <FiltroListaCompra />
+      <hr>
+
+      <!-- Ejercicios 14 - Resaltar texto -->
+      <ResaltarTexto />
+      <hr>
+
+      <!-- Ejercicios 14 - Lista de tareas pendientes -->
+      <ListaTareasPendientes />
+      <hr>
+
+      <!-- Ejercicios 14 - Directiva para Cambiar Color al Pasar el Ratón -->
+      <ColorRaton />
+      <hr>
+
+      <!-- Ejercicios 14 - Lista de Productos con Cálculo del Total -->
+      <CestaCompra />
+      <hr>
+
+      <!-- Ejercicios 14 - Aplicación de Recetas con Detalles Desplegables -->
+      <RecetasDetalles />
       <hr>
     </main>
   </div>

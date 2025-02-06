@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios 1 a 5</title>
+    <!-- Usamos Vue mediante CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- <script src="js/misvues.js"></script> -->
+</head>
+
+<body>
+    <div id="app">
+        <!-- Ejercicio 1 -->
+        <h1>{{ mensaje }}</h1>
+        <button v-on:click="cambiarMensaje">Cambiar mensaje</button>
+
+        <hr>
+
+        <!-- Ejercicio 2 -->
+        <p v-if="visible">El contenido es visible</p>
+        <p v-else>El contenido está oculto</p>
+        <button @click="toggle">Alternar Visibilidad</button>
+
+        <hr>
+
+        <!-- Ejercicio 3 -->
+        <ul>
+            <li v-for="(item, index) in items" :key="index">
+                {{ item }}
+            </li>
+        </ul>
+
+        <hr>
+
+        <!-- Ejercicio 4 -->
+        <input v-model="nombre" placeholder="Escribe tu nombre">
+        <p>Hola, ¡{{ nombre }}!</p>
+
+        <hr>
+
+        <!-- Ejercicio 5 -->
+        <p>Contador: {{ contador }}</p>
+        <p>Doble del contador: {{ contadorDoble }}</p>
+        <button @click="incrementar">Incrementar</button>
+
+        <hr>
+
+        <!-- Ejercicio 9 - Validación simple de formulario con computed -->
+        <input v-model="email" placeholder="Ingresa tu email">
+        <p v-if="emailValid">El email es válido.</p>
+        <p v-else>El email no es válido.</p>
+
+        <hr>
+
+        <!-- Ejercicio 11 -->
+        <p v-show="mostrar">Este mensaje se muestra u oculta usando v-show.</p>
+        <button @click="mostrar = !mostrar">Alternar Visibilidad</button>
+
+        <!-- Ejercicio 12 -->
+        <p>{{ mensaje | mayusculas }}</p>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // Definir un filtro global llamado "mayusculas"
+        Vue.filter('mayusculas', function (value) {
+            if (!value) return '';
+            return value.toString().toUpperCase();
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                mensaje: 'Hola, Vue.js!',                   // Ejercicio 1
+                visible: true,                              // Ejercicio 2
+                items: ['Manzana', 'Banana', 'Cereza'],     // Ejercicio 3
+                nombre: '',                                 // Ejercicio 4
+                contador: 0,                                // Ejercicio 5
+                email: '',                                  // Ejercicio 9
+                mostrar: true,                              // Ejercicio 11
+                mensaje: 'hola, filtro en Vue'              // Ejercicio 12
+
+            },
+            computed: {
+                contadorDoble() {
+                    return this.contador * 2;
+                },
+                emailValid() {
+                    // Validación simple: debe contener un "@" y un punto.
+                    return this.email.includes('@') && this.email.includes('.');
+                }
+            },
+            methods: {
+                cambiarMensaje() {
+                    this.mensaje = '¡Mensaje cambiado!';
+                },
+                toggle() {
+                    this.visible = !this.visible;
+                },
+                incrementar() {
+                    this.contador++;
+                }
+            },
+            watch: {
+                contador(nuevoValor, viejoValor) {
+                    console.log(`El contador cambió de ${viejoValor} a ${nuevoValor}`);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
