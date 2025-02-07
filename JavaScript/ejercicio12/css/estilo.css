@@ -1,0 +1,237 @@
+* {
+    box-sizing: border-box;
+}
+
+button {
+    background: none;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+    padding: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: #45a049;
+        color: white;
+    }
+
+    &:active {
+        background-color: #45a049;
+        border-color: #45a049;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 3px 2px #45a049;
+    }
+
+    &:disabled {
+        background-color: #e7e7e7;
+        color: #c7c7c7;
+        border-color: #c7c7c7;
+        cursor: not-allowed;
+    }
+}
+
+h1 {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.centrado {
+    width: 80%;
+}
+
+
+.error {
+    color: red;
+    font-size: 14px;
+    display: none;
+}
+
+.success {
+    color: green;
+    font-size: 16px;
+    display: none;
+}
+
+.highlight {
+    background-color: yellow;
+    color: black;
+}
+
+#box4,
+.div5 {
+    background-color: #4CAF50;
+    color: white;
+    width: 200px;
+    height: 50px;
+}
+
+#fade1,
+#slide1 {
+    background-color: #4CAF50;
+    width: 50%;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    text-align: center;
+}
+
+/* Firefox */
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+    text-align: center;
+}
+
+.clase1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    background-color: black;
+}
+
+.clase2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: black;
+    background-color: aqua;
+}
+
+#div9,
+#div12 {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background-image: url("../img/html5.png");
+}
+
+
+
+
+
+/* ********************************************** 
+                    Accordion 
+********************************************** */
+
+.accordion {
+    width: 450px;
+    height: 60px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(225, 225, 225, 1);
+    overflow: hidden;
+    transition: height 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.accordion .accordion_tab {
+    padding: 20px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.accordion .accordion_tab .accordion_arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    width: 15px;
+    height: 15px;
+    transition: all 0.3s ease;
+}
+
+.accordion .accordion_tab .accordion_arrow img {
+    width: 100%;
+    height: 100%;
+}
+
+.accordion .accordion_tab.active .accordion_arrow {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.accordion.active {
+    height: 320px;
+}
+
+.accordion .accordion_content {
+    padding: 20px;
+    border-top: 1px solid #e9e9e9;
+}
+
+.accordion .accordion_content .accordion_item {
+    margin-bottom: 20px;
+}
+
+.accordion .accordion_content .accordion_item p.item_title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #6adda2;
+}
+
+.accordion .accordion_content .accordion_item p:last-child {
+    color: #9a9b9f;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+
+
+
+
+
+/* Slider */
+
+.sliderContainer {
+    float: left;
+    position: relative;
+    width: 640px;
+    height: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+
+    display: flex;
+    flex-flow: row nowrap;
+
+    clear: both
+}
+
+.sliderContainer img:first-child {
+    position: relative;
+    width: 100%;
+    left: 0%;
+    top: 0;
+}
+
+img {
+    position: absolute;
+    width: 100%;
+    left: -100%;
+    top: 0;
+
+}
+
+img.contain {
+    object-fit: contain;
+}
+
+.botonsolo {
+    float: left;
+    clear: both;
+    margin: 20px auto;
+}
