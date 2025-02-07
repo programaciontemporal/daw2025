@@ -46,6 +46,7 @@ export default {
     text-align: center;
     border: 1px solid lightgray;
     width: 100vh;
+    color: black;
 }
 
 table {
