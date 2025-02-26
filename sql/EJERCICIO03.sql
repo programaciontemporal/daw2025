@@ -1354,13 +1354,17 @@ LIMIT 1;
 CREATE DATABASE educaonline;
 USE educaonline;
 
+-- Crear base de datos
+CREATE DATABASE IF NOT EXISTS educaonline;
+USE educaonline;
+
 -- Tabla de estudiantes
 CREATE TABLE estudiantes (
     id_estudiante INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     contraseña VARCHAR(255) NOT NULL, -- Contraseña encriptada
-    fecha_registro DATE DEFAULT (CURRENT_DATE)
+    fecha_registro DATE DEFAULT CURRENT_DATE
 );
 
 -- Tabla de cursos
@@ -1370,10 +1374,10 @@ CREATE TABLE cursos (
     descripcion TEXT,
     duracion INT, -- Duración en horas
     nivel VARCHAR(50), -- Ej: "Principiante", "Intermedio", "Avanzado"
-    fecha_publicacion DATE DEFAULT (CURRENT_DATE)
+    fecha_publicacion DATE DEFAULT CURRENT_DATE
 );
 
--- Tabla de instructores
+-- Tabla de instructores y asignación a cursos
 CREATE TABLE instructores (
     id_instructor INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
@@ -1381,8 +1385,7 @@ CREATE TABLE instructores (
     especialidad VARCHAR(255)
 );
 
--- Tabla curso_instructor
--- Relaciona los cursos con los instructores (un curso puede tener varios instructores y viceversa).
+-- Relación de instructores con cursos (un curso puede tener varios instructores)
 CREATE TABLE curso_instructor (
     id_curso INT,
     id_instructor INT,
@@ -1391,40 +1394,29 @@ CREATE TABLE curso_instructor (
     FOREIGN KEY (id_instructor) REFERENCES instructores(id_instructor)
 );
 
--- Tabla inscripciones
--- Registra las inscripciones de los estudiantes a los cursos
+-- Tabla de inscripciones (relación entre estudiantes y cursos)
 CREATE TABLE inscripciones (
     id_inscripcion INT AUTO_INCREMENT PRIMARY KEY,
     id_estudiante INT,
     id_curso INT,
-    fecha_inscripcion DATE DEFAULT (CURRENT_DATE),
+    fecha_inscripcion DATE DEFAULT CURRENT_DATE,
     FOREIGN KEY (id_estudiante) REFERENCES estudiantes(id_estudiante),
     FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
 );
 
--- Tabla modulos
--- Almacena los módulos o unidades de cada curso
-CREATE TABLE modulos (
+-- Tabla de módulos y materiales dentro de un mismo registro
+CREATE TABLE modulos_materiales (
     id_modulo INT AUTO_INCREMENT PRIMARY KEY,
     id_curso INT,
-    titulo VARCHAR(255) NOT NULL,
-    descripcion TEXT,
-    orden INT, -- Orden del módulo dentro del curso
+    titulo_modulo VARCHAR(255) NOT NULL,
+    descripcion_modulo TEXT,
+    orden INT, -- El orden del módulo dentro del curso
+    tipo_material VARCHAR(50), -- Ej: "Video", "PDF", "Quiz"
+    url_material VARCHAR(255) NOT NULL, -- Enlace o ubicación del material
     FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
 );
 
--- Tabla materiales
--- Almacena los materiales de estudio asociados a cada módulo
-CREATE TABLE materiales (
-    id_material INT AUTO_INCREMENT PRIMARY KEY,
-    id_modulo INT,
-    tipo VARCHAR(50), -- Ej: "Video", "PDF", "Quiz"
-    url VARCHAR(255) NOT NULL, -- Enlace o ubicación del material
-    FOREIGN KEY (id_modulo) REFERENCES modulos(id_modulo)
-);
-
--- Tabla progreso_estudiante
--- Registra el progreso de los estudiantes en los cursos
+-- Tabla de progreso del estudiante (para saber si ha completado un módulo/material)
 CREATE TABLE progreso_estudiante (
     id_progreso INT AUTO_INCREMENT PRIMARY KEY,
     id_estudiante INT,
@@ -1432,188 +1424,646 @@ CREATE TABLE progreso_estudiante (
     completado BOOLEAN DEFAULT FALSE,
     fecha_completado DATE,
     FOREIGN KEY (id_estudiante) REFERENCES estudiantes(id_estudiante),
-    FOREIGN KEY (id_modulo) REFERENCES modulos(id_modulo)
+    FOREIGN KEY (id_modulo) REFERENCES modulos_materiales(id_modulo)
 );
 
 -- Datos de ejemplo
-INSERT INTO estudiantes (nombre, email, contraseña, fecha_registro) VALUES
-('Juan Pérez', 'juan.perez@example.com', 'password123', '2023-10-01'),
-('María Gómez', 'maria.gomez@example.com', 'password123', '2023-10-02'),
-('Carlos Ruiz', 'carlos.ruiz@example.com', 'password123', '2023-10-03'),
-('Ana López', 'ana.lopez@example.com', 'password123', '2023-10-04'),
-('Pedro Sánchez', 'pedro.sanchez@example.com', 'password123', '2023-10-05'),
-('Laura Martínez', 'laura.martinez@example.com', 'password123', '2023-10-06'),
-('Miguel Torres', 'miguel.torres@example.com', 'password123', '2023-10-07'),
-('Sofía Ramírez', 'sofia.ramirez@example.com', 'password123', '2023-10-08'),
-('Jorge Díaz', 'jorge.diaz@example.com', 'password123', '2023-10-09'),
-('Lucía Hernández', 'lucia.hernandez@example.com', 'password123', '2023-10-10'),
-('Diego Flores', 'diego.flores@example.com', 'password123', '2023-10-11'),
-('Elena Castro', 'elena.castro@example.com', 'password123', '2023-10-12'),
-('Fernando Vargas', 'fernando.vargas@example.com', 'password123', '2023-10-13'),
-('Carmen Rojas', 'carmen.rojas@example.com', 'password123', '2023-10-14'),
-('Ricardo Morales', 'ricardo.morales@example.com', 'password123', '2023-10-15'),
-('Patricia Guzmán', 'patricia.guzman@example.com', 'password123', '2023-10-16'),
-('Oscar Herrera', 'oscar.herrera@example.com', 'password123', '2023-10-17'),
-('Adriana Luna', 'adriana.luna@example.com', 'password123', '2023-10-18'),
-('Raúl Medina', 'raul.medina@example.com', 'password123', '2023-10-19'),
-('Silvia Paredes', 'silvia.paredes@example.com', 'password123', '2023-10-20');
+INSERT INTO estudiantes (nombre, email, contraseña) VALUES
+('Juan Pérez', 'juanperez@example.com', 'password123'),
+('María López', 'marialopez@example.com', 'password456'),
+('Carlos Sánchez', 'carlossanchez@example.com', 'password789'),
+('Laura Gómez', 'lauragomez@example.com', 'password101'),
+('Pedro Ramírez', 'pedroramirez@example.com', 'password102'),
+('Ana Martínez', 'anamartinez@example.com', 'password103'),
+('Luis Fernández', 'luisfernandez@example.com', 'password104'),
+('Elena Rodríguez', 'elenarodriguez@example.com', 'password105'),
+('David Torres', 'davidtorres@example.com', 'password106'),
+('Sofía Castro', 'sofiacastro@example.com', 'password107');
 
-INSERT INTO cursos (titulo, descripcion, duracion, nivel, id_instructor, fecha_publicacion) VALUES
-('Introducción a la Programación', 'Aprende los fundamentos de la programación.', 40, 'Principiante', 1, '2023-09-01'),
-('Matemáticas Básicas', 'Curso de matemáticas para principiantes.', 30, 'Principiante', 2, '2023-09-02'),
-('Física Moderna', 'Conceptos avanzados de física.', 50, 'Avanzado', 3, '2023-09-03'),
-('Literatura Clásica', 'Explora las obras maestras de la literatura.', 20, 'Intermedio', 4, '2023-09-04'),
-('Historia Universal', 'Un recorrido por la historia del mundo.', 25, 'Intermedio', 5, '2023-09-05'),
-('Biología Celular', 'Estudio de las células y su funcionamiento.', 35, 'Avanzado', 6, '2023-09-06'),
-('Química Orgánica', 'Introducción a la química de los compuestos orgánicos.', 45, 'Intermedio', 7, '2023-09-07'),
-('Arte Contemporáneo', 'Exploración del arte moderno.', 15, 'Principiante', 8, '2023-09-08'),
-('Economía Básica', 'Conceptos fundamentales de economía.', 30, 'Principiante', 9, '2023-09-09'),
-('Inglés Avanzado', 'Perfecciona tu inglés con este curso.', 40, 'Avanzado', 10, '2023-09-10'),
-('Filosofía Antigua', 'Un viaje por las ideas de los filósofos clásicos.', 20, 'Intermedio', 11, '2023-09-11'),
-('Geografía Mundial', 'Conoce los países y sus características.', 25, 'Principiante', 12, '2023-09-12'),
-('Música Clásica', 'Historia y apreciación de la música clásica.', 15, 'Intermedio', 13, '2023-09-13'),
-('Derecho Penal', 'Introducción al derecho penal.', 30, 'Avanzado', 14, '2023-09-14'),
-('Psicología Social', 'Estudio del comportamiento en sociedad.', 35, 'Intermedio', 15, '2023-09-15'),
-('Marketing Digital', 'Estrategias de marketing en línea.', 40, 'Principiante', 16, '2023-09-16'),
-('Diseño Gráfico', 'Fundamentos del diseño visual.', 30, 'Principiante', 17, '2023-09-17'),
-('Ingeniería de Software', 'Desarrollo de software profesional.', 50, 'Avanzado', 18, '2023-09-18'),
-('Medicina General', 'Conceptos básicos de medicina.', 45, 'Intermedio', 19, '2023-09-19'),
-('Administración de Empresas', 'Gestión eficiente de negocios.', 35, 'Principiante', 20, '2023-09-20');
+INSERT INTO cursos (titulo, descripcion, duracion, nivel) VALUES
+('Introducción a Python', 'Curso básico de programación en Python', 20, 'Principiante'),
+('JavaScript Avanzado', 'Curso avanzado de JavaScript para desarrolladores', 25, 'Avanzado'),
+('Desarrollo Web con HTML y CSS', 'Curso completo de desarrollo web con HTML y CSS', 30, 'Principiante'),
+('Bases de Datos con MySQL', 'Curso sobre diseño y optimización de bases de datos MySQL', 35, 'Intermedio'),
+('Inteligencia Artificial con Python', 'Curso sobre AI usando Python y bibliotecas populares', 40, 'Avanzado'),
+('Marketing Digital', 'Fundamentos del marketing digital y estrategias online', 15, 'Principiante'),
+('Ciberseguridad para Empresas', 'Curso sobre prácticas de seguridad informática en empresas', 50, 'Avanzado'),
+('Machine Learning para Principiantes', 'Introducción a los conceptos básicos de Machine Learning', 28, 'Principiante'),
+('Redes de Computadoras', 'Curso sobre arquitectura y administración de redes de computadoras', 45, 'Intermedio'),
+('Desarrollo de Aplicaciones Móviles', 'Desarrollo de apps para Android e iOS usando Flutter', 32, 'Intermedio');
 
 INSERT INTO instructores (nombre, email, especialidad) VALUES
-('Alejandro Méndez', 'alejandro.mendez@example.com', 'Programación'),
-('Beatriz Ríos', 'beatriz.rios@example.com', 'Matemáticas'),
-('César Navarro', 'cesar.navarro@example.com', 'Física'),
-('Diana Campos', 'diana.campos@example.com', 'Literatura'),
-('Eduardo Soto', 'eduardo.soto@example.com', 'Historia'),
-('Fabiola Ortega', 'fabiola.ortega@example.com', 'Biología'),
-('Gabriel Peña', 'gabriel.pena@example.com', 'Química'),
-('Hilda Reyes', 'hilda.reyes@example.com', 'Arte'),
-('Iván Mendoza', 'ivan.mendoza@example.com', 'Economía'),
-('Jacqueline Vega', 'jacqueline.vega@example.com', 'Inglés'),
-('Kevin Fuentes', 'kevin.fuentes@example.com', 'Filosofía'),
-('Lorena Delgado', 'lorena.delgado@example.com', 'Geografía'),
-('Mauricio Silva', 'mauricio.silva@example.com', 'Música'),
-('Natalia Cortés', 'natalia.cortes@example.com', 'Derecho'),
-('Óscar Pacheco', 'oscar.pacheco@example.com', 'Psicología'),
-('Paola Rivas', 'paola.rivas@example.com', 'Marketing'),
-('Quetzalli Juárez', 'quetzalli.juarez@example.com', 'Diseño Gráfico'),
-('Rafael Montes', 'rafael.montes@example.com', 'Ingeniería'),
-('Sara Jiménez', 'sara.jimenez@example.com', 'Medicina'),
-('Tomás Cervantes', 'tomas.cervantes@example.com', 'Administración');
+('Carlos Gómez', 'carlosgomez@example.com', 'Desarrollo Web'),
+('Ana Ruiz', 'anaruiz@example.com', 'Ciberseguridad'),
+('Pedro García', 'pedrogarcia@example.com', 'Inteligencia Artificial'),
+('Sofía Hernández', 'sofiahernandez@example.com', 'Marketing Digital'),
+('Javier López', 'javierlopez@example.com', 'Bases de Datos'),
+('Martín Sánchez', 'martinsanchez@example.com', 'Machine Learning'),
+('Laura Díaz', 'lauradiaz@example.com', 'JavaScript'),
+('Antonio Fernández', 'antoniofernandez@example.com', 'Redes de Computadoras'),
+('Elena Jiménez', 'elenajimenez@example.com', 'Desarrollo Móvil'),
+('Luis Morales', 'luismorales@example.com', 'Python');
 
 INSERT INTO curso_instructor (id_curso, id_instructor) VALUES
-(1, 1), -- Introducción a la Programación -> Alejandro Méndez
-(2, 2), -- Matemáticas Básicas -> Beatriz Ríos
-(3, 3), -- Física Moderna -> César Navarro
-(4, 4), -- Literatura Clásica -> Diana Campos
-(5, 5), -- Historia Universal -> Eduardo Soto
-(6, 6), -- Biología Celular -> Fabiola Ortega
-(7, 7), -- Química Orgánica -> Gabriel Peña
-(8, 8), -- Arte Contemporáneo -> Hilda Reyes
-(9, 9), -- Economía Básica -> Iván Mendoza
-(10, 10); -- Inglés Avanzado -> Jacqueline Vega
+(1, 10), -- Curso 1: Introducción a Python con Instructor 10: Luis Morales
+(2, 7),  -- Curso 2: JavaScript Avanzado con Instructor 7: Laura Díaz
+(3, 1),  -- Curso 3: Desarrollo Web con HTML y CSS con Instructor 1: Carlos Gómez
+(4, 5),  -- Curso 4: Bases de Datos con MySQL con Instructor 5: Javier López
+(5, 3),  -- Curso 5: Inteligencia Artificial con Python con Instructor 3: Pedro García
+(6, 4),  -- Curso 6: Marketing Digital con Instructor 4: Sofía Hernández
+(7, 2),  -- Curso 7: Ciberseguridad para Empresas con Instructor 2: Ana Ruiz
+(8, 6),  -- Curso 8: Machine Learning para Principiantes con Instructor 6: Martín Sánchez
+(9, 8),  -- Curso 9: Redes de Computadoras con Instructor 8: Antonio Fernández
+(10, 9); -- Curso 10: Desarrollo de Aplicaciones Móviles con Instructor 9: Elena Jiménez
 
-INSERT INTO inscripciones (id_estudiante, id_curso, fecha_inscripcion) VALUES
-(1, 1, '2023-10-01'),
-(2, 2, '2023-10-02'),
-(3, 3, '2023-10-03'),
-(4, 4, '2023-10-04'),
-(5, 5, '2023-10-05'),
-(6, 6, '2023-10-06'),
-(7, 7, '2023-10-07'),
-(8, 8, '2023-10-08'),
-(9, 9, '2023-10-09'),
-(10, 10, '2023-10-10'),
-(11, 11, '2023-10-11'),
-(12, 12, '2023-10-12'),
-(13, 13, '2023-10-13'),
-(14, 14, '2023-10-14'),
-(15, 15, '2023-10-15'),
-(16, 16, '2023-10-16'),
-(17, 17, '2023-10-17'),
-(18, 18, '2023-10-18'),
-(19, 19, '2023-10-19'),
-(20, 20, '2023-10-20');
+INSERT INTO inscripciones (id_estudiante, id_curso) VALUES
+(1, 1),  -- Estudiante 1: Juan Pérez inscrito en Curso 1
+(2, 2),  -- Estudiante 2: María López inscrita en Curso 2
+(3, 3),  -- Estudiante 3: Carlos Sánchez inscrito en Curso 3
+(4, 4),  -- Estudiante 4: Laura Gómez inscrita en Curso 4
+(5, 5),  -- Estudiante 5: Pedro Ramírez inscrito en Curso 5
+(6, 6),  -- Estudiante 6: Ana Martínez inscrita en Curso 6
+(7, 7),  -- Estudiante 7: Luis Fernández inscrito en Curso 7
+(8, 8),  -- Estudiante 8: Elena Rodríguez inscrita en Curso 8
+(9, 9),  -- Estudiante 9: David Torres inscrito en Curso 9
+(10, 10); -- Estudiante 10: Sofía Castro inscrita en Curso 10
 
-INSERT INTO modulos (id_curso, titulo, descripcion, tipo_material, url_material, orden) VALUES
-(1, 'Introducción a Python', 'Aprende los conceptos básicos de Python.', 'Video', 'https://example.com/python-intro', 1),
-(1, 'Estructuras de Datos', 'Listas, tuplas y diccionarios en Python.', 'PDF', 'https://example.com/python-data-structures', 2),
-(2, 'Álgebra Básica', 'Operaciones algebraicas fundamentales.', 'Video', 'https://example.com/algebra-basica', 1),
-(2, 'Geometría', 'Conceptos básicos de geometría.', 'PDF', 'https://example.com/geometria', 2),
-(3, 'Relatividad Especial', 'Teoría de la relatividad de Einstein.', 'Video', 'https://example.com/relatividad-especial', 1),
-(3, 'Mecánica Cuántica', 'Introducción a la mecánica cuántica.', 'PDF', 'https://example.com/mecanica-cuantica', 2),
-(4, 'Literatura Griega', 'Obras clásicas de la antigua Grecia.', 'Video', 'https://example.com/literatura-griega', 1),
-(4, 'Literatura Romana', 'Obras clásicas de la antigua Roma.', 'PDF', 'https://example.com/literatura-romana', 2),
-(5, 'Edad Antigua', 'Historia de las primeras civilizaciones.', 'Video', 'https://example.com/edad-antigua', 1),
-(5, 'Edad Media', 'Historia del período medieval.', 'PDF', 'https://example.com/edad-media', 2),
-(6, 'Células Eucariotas', 'Estructura y función de las células eucariotas.', 'Video', 'https://example.com/celulas-eucariotas', 1),
-(6, 'Células Procariotas', 'Estructura y función de las células procariotas.', 'PDF', 'https://example.com/celulas-procariotas', 2),
-(7, 'Química del Carbono', 'Introducción a los compuestos de carbono.', 'Video', 'https://example.com/quimica-carbono', 1),
-(7, 'Hidrocarburos', 'Tipos y propiedades de los hidrocarburos.', 'PDF', 'https://example.com/hidrocarburos', 2),
-(8, 'Arte Abstracto', 'Exploración del arte abstracto.', 'Video', 'https://example.com/arte-abstracto', 1),
-(8, 'Surrealismo', 'Movimiento artístico del surrealismo.', 'PDF', 'https://example.com/surrealismo', 2),
-(9, 'Oferta y Demanda', 'Conceptos básicos de oferta y demanda.', 'Video', 'https://example.com/oferta-demanda', 1),
-(9, 'Macroeconomía', 'Introducción a la macroeconomía.', 'PDF', 'https://example.com/macroeconomia', 2),
-(10, 'Gramática Avanzada', 'Reglas gramaticales del inglés avanzado.', 'Video', 'https://example.com/gramatica-avanzada', 1),
-(10, 'Vocabulario Técnico', 'Vocabulario especializado en inglés.', 'PDF', 'https://example.com/vocabulario-tecnico', 2);
-
-INSERT INTO materiales (id_modulo, tipo, url) VALUES
-(1, 'Video', 'https://example.com/python-intro-video'), -- Material para el módulo 1 (Introducción a Python)
-(1, 'PDF', 'https://example.com/python-intro-pdf'), -- Material para el módulo 1
-(2, 'Video', 'https://example.com/data-structures-video'), -- Material para el módulo 2 (Estructuras de Datos)
-(2, 'PDF', 'https://example.com/data-structures-pdf'), -- Material para el módulo 2
-(3, 'Video', 'https://example.com/algebra-video'), -- Material para el módulo 3 (Álgebra Básica)
-(3, 'PDF', 'https://example.com/algebra-pdf'), -- Material para el módulo 3
-(4, 'Video', 'https://example.com/geometry-video'), -- Material para el módulo 4 (Geometría)
-(4, 'PDF', 'https://example.com/geometry-pdf'), -- Material para el módulo 4
-(5, 'Video', 'https://example.com/relativity-video'), -- Material para el módulo 5 (Relatividad Especial)
-(5, 'PDF', 'https://example.com/relativity-pdf'); -- Material para el módulo 5
+INSERT INTO modulos_materiales (id_curso, titulo_modulo, descripcion_modulo, orden, tipo_material, url_material) VALUES
+(1, 'Introducción a Python', 'Módulo básico de introducción al lenguaje Python', 1, 'Video', 'https://example.com/curso1/video1'),
+(1, 'Variables y Tipos de Datos', 'Aprenderemos sobre variables y tipos de datos en Python', 2, 'PDF', 'https://example.com/curso1/pdf1'),
+(2, 'Estructuras de Control', 'Condicionales y bucles en JavaScript', 1, 'Video', 'https://example.com/curso2/video1'),
+(2, 'Funciones Avanzadas', 'Funciones avanzadas y callbacks en JavaScript', 2, 'PDF', 'https://example.com/curso2/pdf1'),
+(3, 'HTML Básico', 'Módulo básico de HTML para creación de páginas web', 1, 'Video', 'https://example.com/curso3/video1'),
+(3, 'CSS Avanzado', 'Estilización avanzada de páginas web con CSS', 2, 'PDF', 'https://example.com/curso3/pdf1'),
+(4, 'Modelado de Datos', 'Técnicas de modelado de bases de datos con MySQL', 1, 'Video', 'https://example.com/curso4/video1'),
+(4, 'Consultas SQL', 'Cómo realizar consultas en bases de datos MySQL', 2, 'PDF', 'https://example.com/curso4/pdf1'),
+(5, 'Introducción a AI', 'Introducción a los fundamentos de la Inteligencia Artificial', 1, 'Video', 'https://example.com/curso5/video1'),
+(5, 'Redes Neuronales', 'Teoría y prácticas de redes neuronales en IA', 2, 'PDF', 'https://example.com/curso5/pdf1');
 
 INSERT INTO progreso_estudiante (id_estudiante, id_modulo, completado, fecha_completado) VALUES
-(1, 1, TRUE, '2023-10-05'),
-(2, 3, TRUE, '2023-10-06'),
-(3, 5, TRUE, '2023-10-07'),
-(4, 7, TRUE, '2023-10-08'),
-(5, 9, TRUE, '2023-10-09'),
-(6, 11, TRUE, '2023-10-10'),
-(7, 13, TRUE, '2023-10-11'),
-(8, 15, TRUE, '2023-10-12'),
-(9, 17, TRUE, '2023-10-13'),
-(10, 19, TRUE, '2023-10-14'),
-(11, 2, FALSE, NULL),
-(12, 4, FALSE, NULL),
-(13, 6, FALSE, NULL),
-(14, 8, FALSE, NULL),
-(15, 10, FALSE, NULL),
-(16, 12, FALSE, NULL),
-(17, 14, FALSE, NULL),
-(18, 16, FALSE, NULL),
-(19, 18, FALSE, NULL),
-(20, 20, FALSE, NULL);
+(1, 1, TRUE, '2025-02-01'), -- Estudiante 1: Juan Pérez completó Módulo 1
+(2, 2, FALSE, NULL), -- Estudiante 2: María López no ha completado Módulo 2
+(3, 3, TRUE, '2025-02-02'), -- Estudiante 3: Carlos Sánchez completó Módulo 3
+(4, 4, TRUE, '2025-02-05'), -- Estudiante 4: Laura Gómez completó Módulo 4
+(5, 5, FALSE, NULL), -- Estudiante 5: Pedro Ramírez no ha completado Módulo 5
+(6, 6, TRUE, '2025-02-07'), -- Estudiante 6: Ana Martínez completó Módulo 6
+(7, 7, TRUE, '2025-02-10'), -- Estudiante 7: Luis Fernández completó Módulo 7
+(8, 8, FALSE, NULL), -- Estudiante 8: Elena Rodríguez no ha completado Módulo 8
+(9, 9, TRUE, '2025-02-12'), -- Estudiante 9: David Torres completó Módulo 9
+(10, 10, TRUE, '2025-02-15'); -- Estudiante 10: Sofía Castro completó Módulo 10
 
--- consultas de ejemplo
+-- Consults de ejemplo
+-- Mostrar todos los cursos junto con los instructores asignados
+SELECT c.titulo AS "Curso", i.nombre AS "Instructor"
+FROM cursos c
+JOIN curso_instructor ci ON c.id_curso = ci.id_curso
+JOIN instructores i ON ci.id_instructor = i.id_instructor;
 
--- Obtener todos los cursos en los que está inscrito un estudiante (ID = 1):
-SELECT c.titulo, c.descripcion
+-- Mostrar todos los estudiantes con los cursos en los que están inscritos
+SELECT e.nombre AS "Estudiante", c.titulo AS "Curso"
+FROM estudiantes e
+JOIN inscripciones i ON e.id_estudiante = i.id_estudiante
+JOIN cursos c ON i.id_curso = c.id_curso;
+
+-- Ver los módulos y materiales de un curso específico
+SELECT c.titulo AS "Curso", m.titulo_modulo AS "Módulo", m.tipo_material AS "Tipo de Material", m.url_material AS "URL del Material"
+FROM modulos_materiales m
+JOIN cursos c ON m.id_curso = c.id_curso
+WHERE c.id_curso = 1; -- Puedes cambiar el 1 por el ID del curso que quieras consultar
+
+-- Ver el progreso de un estudiante en cada módulo
+SELECT e.nombre AS "Estudiante", c.titulo AS "Curso", m.titulo_modulo AS "Módulo", 
+       p.completado AS "Completado", p.fecha_completado AS "Fecha de Finalización"
+FROM progreso_estudiante p
+JOIN estudiantes e ON p.id_estudiante = e.id_estudiante
+JOIN modulos_materiales m ON p.id_modulo = m.id_modulo
+JOIN cursos c ON m.id_curso = c.id_curso;
+
+-- Mostrar todos los estudiantes y los cursos que han completado
+SELECT e.nombre AS "Estudiante", c.titulo AS "Curso", m.titulo_modulo AS "Módulo"
+FROM progreso_estudiante p
+JOIN estudiantes e ON p.id_estudiante = e.id_estudiante
+JOIN modulos_materiales m ON p.id_modulo = m.id_modulo
+JOIN cursos c ON m.id_curso = c.id_curso
+WHERE p.completado = TRUE;
+
+-- Mostrar los estudiantes que no han completado un módulo específico
+SELECT e.nombre AS "Estudiante", c.titulo AS "Curso", m.titulo_modulo AS "Módulo"
+FROM progreso_estudiante p
+JOIN estudiantes e ON p.id_estudiante = e.id_estudiante
+JOIN modulos_materiales m ON p.id_modulo = m.id_modulo
+JOIN cursos c ON m.id_curso = c.id_curso
+WHERE p.completado = FALSE AND m.id_modulo = 1; -- Puedes cambiar el 1 por el ID del módulo que desees
+
+-- Mostrar todos los materiales de estudio de un curso, ordenados por módulo
+SELECT c.titulo AS "Curso", m.titulo_modulo AS "Módulo", m.tipo_material AS "Tipo de Material", m.url_material AS "URL"
+FROM modulos_materiales m
+JOIN cursos c ON m.id_curso = c.id_curso
+ORDER BY m.orden;
+
+-- Ver todos los cursos junto con sus estudiantes inscritos
+SELECT c.titulo AS "Curso", e.nombre AS "Estudiante"
 FROM cursos c
 JOIN inscripciones i ON c.id_curso = i.id_curso
-WHERE i.id_estudiante = 1;
+JOIN estudiantes e ON i.id_estudiante = e.id_estudiante;
 
--- Obtener todos los materiales de un módulo específico (ID = 1):
-SELECT m.tipo, m.url
-FROM materiales m
-WHERE m.id_modulo = 1;
-
--- Obtener el progreso de un estudiante en un curso (ID del estudiante = 1, ID del curso = 1):
-SELECT mo.titulo AS modulo, pe.completado, pe.fecha_completado
-FROM progreso_estudiante pe
-JOIN modulos mo ON pe.id_modulo = mo.id_modulo
-WHERE pe.id_estudiante = 1 AND mo.id_curso = 1;
-
--- Obtener los instructores de un curso específico (ID = 1):
-SELECT i.nombre, i.especialidad
+-- Ver todos los instructores junto con los cursos que imparten
+SELECT i.nombre AS "Instructor", c.titulo AS "Curso"
 FROM instructores i
 JOIN curso_instructor ci ON i.id_instructor = ci.id_instructor
-WHERE ci.id_curso = 1;
+JOIN cursos c ON ci.id_curso = c.id_curso;
 
+--  Mostrar la relación de progreso de un estudiante en todos los cursos en los que está inscrito
+SELECT e.nombre AS "Estudiante", c.titulo AS "Curso", p.completado AS "Completado"
+FROM estudiantes e
+JOIN inscripciones i ON e.id_estudiante = i.id_estudiante
+JOIN cursos c ON i.id_curso = c.id_curso
+JOIN progreso_estudiante p ON e.id_estudiante = p.id_estudiante AND c.id_curso = p.id_curso;
+
+
+
+
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+
+/*
+    Desarrolla una base de datos para un marketplace donde vendedores puedan publicar
+    productos y los compradores puedan realizar pedidos.
+*/
+
+CREATE DATABASE marketplace;
+USE marketplace;
+
+-- Tablas
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    direccion TEXT,
+    tipo_usuario ENUM('comprador', 'vendedor') NOT NULL
+);
+
+CREATE TABLE vendedores (
+    id_vendedor INT PRIMARY KEY,
+    id_usuario INT,
+    nombre_tienda VARCHAR(255),
+    descripcion_tienda TEXT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE productos (
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
+    id_vendedor INT,
+    nombre_producto VARCHAR(255) NOT NULL,
+    descripcion_producto TEXT,
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL,
+    imagen_url VARCHAR(255),
+    fecha_publicacion DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (id_vendedor) REFERENCES vendedores(id_vendedor)
+);
+
+CREATE TABLE pedidos (
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    id_comprador INT,
+    fecha_pedido DATE DEFAULT CURRENT_DATE,
+    estado ENUM('pendiente', 'enviado', 'entregado', 'cancelado') DEFAULT 'pendiente',
+    total DECIMAL(10, 2),
+    FOREIGN KEY (id_comprador) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE detalles_pedido (
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido INT,
+    id_producto INT,
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10, 2) NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
+
+-- Datos de ejemplo
+INSERT INTO usuarios (nombre, email, telefono, direccion, tipo_usuario) VALUES
+('Juan Pérez', 'juan.perez@example.com', '123456789', 'Calle Ficticia 123, Ciudad', 'comprador'),
+('María Gómez', 'maria.gomez@example.com', '987654321', 'Avenida Real 456, Ciudad', 'comprador'),
+('Carlos Ruiz', 'carlos.ruiz@example.com', '456789123', 'Calle Nueva 789, Ciudad', 'vendedor'),
+('Ana López', 'ana.lopez@example.com', '321654987', 'Calle Vieja 321, Ciudad', 'vendedor');
+
+INSERT INTO vendedores (id_vendedor, id_usuario, nombre_tienda, descripcion_tienda) VALUES
+(1, 3, 'Tienda de Carlos', 'Tienda especializada en productos electrónicos'),
+(2, 4, 'Tienda de Ana', 'Tienda de ropa y accesorios');
+
+INSERT INTO productos (id_vendedor, nombre_producto, descripcion_producto, precio, stock, imagen_url) VALUES
+(1, 'Laptop Gaming', 'Laptop potente para juegos', 1200.00, 10, 'url_imagen_laptop'),
+(1, 'Auriculares Bluetooth', 'Auriculares inalámbricos con cancelación de ruido', 150.00, 25, 'url_imagen_auriculares'),
+(2, 'Camiseta Deportiva', 'Camiseta de algodón para deportes', 25.00, 50, 'url_imagen_camiseta'),
+(2, 'Zapatos Running', 'Zapatos deportivos para correr', 75.00, 30, 'url_imagen_zapatos');
+
+INSERT INTO pedidos (id_comprador, estado, total) VALUES
+(1, 'pendiente', 1350.00),
+(2, 'enviado', 100.00);
+
+INSERT INTO detalles_pedido (id_pedido, id_producto, cantidad, precio_unitario, total) VALUES
+(1, 1, 1, 1200.00, 1200.00),
+(1, 2, 1, 150.00, 150.00),
+(2, 3, 2, 25.00, 50.00);
+
+-- Ejemplos de consultas
+SELECT p.nombre_producto, p.descripcion_producto, p.precio, p.stock
+FROM productos p
+WHERE p.id_vendedor = 1;
+
+SELECT pe.id_pedido, pe.fecha_pedido, pe.estado, pe.total
+FROM pedidos pe
+WHERE pe.id_comprador = 1;
+
+SELECT p.nombre_producto, SUM(dp.cantidad) AS total_vendido
+FROM detalles_pedido dp
+JOIN productos p ON dp.id_producto = p.id_producto
+GROUP BY p.id_producto
+ORDER BY total_vendido DESC;
+
+
+
+
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+
+/*
+    Crea una base de datos para un hospital en el que los doctores atiendan pacientes y
+    registren diagnósticos y tratamientos.
+*/
+
+CREATE DATABASE hospital;
+USE hospital;
+
+-- Tablas
+-- Tabla de Pacientes
+CREATE TABLE pacientes (
+    id_paciente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    fecha_nacimiento DATE NOT NULL,
+    genero ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
+    telefono VARCHAR(20),
+    direccion TEXT
+);
+
+-- Tabla de Doctores
+CREATE TABLE doctores (
+    id_doctor INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    especialidad VARCHAR(255) NOT NULL,
+    telefono VARCHAR(20),
+    email VARCHAR(255) UNIQUE
+);
+
+-- Tabla de Consultas
+CREATE TABLE consultas (
+    id_consulta INT AUTO_INCREMENT PRIMARY KEY,
+    id_paciente INT,
+    id_doctor INT,
+    fecha_consulta DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (id_paciente) REFERENCES pacientes(id_paciente),
+    FOREIGN KEY (id_doctor) REFERENCES doctores(id_doctor)
+);
+
+-- Tabla de Diagnósticos
+CREATE TABLE diagnosticos (
+    id_diagnostico INT AUTO_INCREMENT PRIMARY KEY,
+    id_consulta INT,
+    diagnostico TEXT NOT NULL,
+    fecha_diagnostico DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (id_consulta) REFERENCES consultas(id_consulta)
+);
+
+-- Tabla de Tratamientos
+CREATE TABLE tratamientos (
+    id_tratamiento INT AUTO_INCREMENT PRIMARY KEY,
+    id_diagnostico INT,
+    tratamiento TEXT NOT NULL,
+    fecha_tratamiento DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (id_diagnostico) REFERENCES diagnosticos(id_diagnostico)
+);
+
+
+-- Datos de ejemplo
+INSERT INTO pacientes (nombre, fecha_nacimiento, genero, telefono, direccion) VALUES
+('Juan Pérez', '1985-05-15', 'Masculino', '123456789', 'Calle Ficticia 123, Ciudad'),
+('María Gómez', '1990-08-25', 'Femenino', '987654321', 'Avenida Real 456, Ciudad'),
+('Carlos Ruiz', '1978-12-10', 'Masculino', '456789123', 'Calle Nueva 789, Ciudad');
+
+INSERT INTO doctores (nombre, especialidad, telefono, email) VALUES
+('Dr. Ana López', 'Cardiología', '321654987', 'ana.lopez@hospital.com'),
+('Dr. Pedro Fernández', 'Pediatría', '654321789', 'pedro.fernandez@hospital.com'),
+('Dr. Julia Martínez', 'Dermatología', '987321654', 'julia.martinez@hospital.com');
+
+INSERT INTO consultas (id_paciente, id_doctor, fecha_consulta) VALUES
+(1, 1, '2025-02-10'),
+(2, 2, '2025-02-15'),
+(3, 3, '2025-02-20');
+
+INSERT INTO diagnosticos (id_consulta, diagnostico, fecha_diagnostico) VALUES
+(1, 'Hipertensión arterial', '2025-02-10'),
+(2, 'Resfriado común', '2025-02-15'),
+(3, 'Eczema en la piel', '2025-02-20');
+
+INSERT INTO tratamientos (id_diagnostico, tratamiento, fecha_tratamiento) VALUES
+(1, 'Medicamentos antihipertensivos', '2025-02-10'),
+(2, 'Recomendaciones de descanso y líquidos', '2025-02-15'),
+(3, 'Crema tópica para el eczema', '2025-02-20');
+
+-- Consultas varias
+SELECT p.nombre AS paciente, p.fecha_nacimiento, p.genero, p.telefono, p.direccion
+FROM pacientes p
+JOIN consultas c ON p.id_paciente = c.id_paciente
+JOIN doctores d ON c.id_doctor = d.id_doctor
+WHERE d.nombre = 'Dr. Ana López';
+
+SELECT d.diagnostico, d.fecha_diagnostico
+FROM diagnosticos d
+JOIN consultas c ON d.id_consulta = c.id_consulta
+JOIN pacientes p ON c.id_paciente = p.id_paciente
+JOIN doctores doc ON c.id_doctor = doc.id_doctor
+WHERE p.nombre = 'Juan Pérez' AND doc.nombre = 'Dr. Ana López';
+
+SELECT t.tratamiento, t.fecha_tratamiento
+FROM tratamientos t
+JOIN diagnosticos d ON t.id_diagnostico = d.id_diagnostico
+WHERE d.diagnostico = 'Hipertensión arterial';
+
+
+
+
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+
+/*
+    Diseña una base de datos para un sistema de transporte público,
+    donde se gestionen rutas, estaciones y pasajeros.
+*/
+
+CREATE DATABASE transporte_publico;
+USE transporte_publico;
+
+-- Tablas
+-- Tabla de Rutas
+CREATE TABLE rutas (
+    id_ruta INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_ruta VARCHAR(255) NOT NULL,
+    descripcion TEXT
+);
+
+-- Tabla de Estaciones
+CREATE TABLE estaciones (
+    id_estacion INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_estacion VARCHAR(255) NOT NULL,
+    ubicacion VARCHAR(255)
+);
+
+-- Tabla de Pasajeros
+CREATE TABLE pasajeros (
+    id_pasajero INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    telefono VARCHAR(20)
+);
+
+-- Tabla de Viajes
+CREATE TABLE viajes (
+    id_viaje INT AUTO_INCREMENT PRIMARY KEY,
+    id_pasajero INT,
+    id_ruta INT,
+    id_estacion_origen INT,
+    id_estacion_destino INT,
+    fecha_viaje DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_pasajero) REFERENCES pasajeros(id_pasajero),
+    FOREIGN KEY (id_ruta) REFERENCES rutas(id_ruta),
+    FOREIGN KEY (id_estacion_origen) REFERENCES estaciones(id_estacion),
+    FOREIGN KEY (id_estacion_destino) REFERENCES estaciones(id_estacion)
+);
+
+-- Tabla de Tickets
+CREATE TABLE tickets (
+    id_ticket INT AUTO_INCREMENT PRIMARY KEY,
+    id_viaje INT,
+    precio DECIMAL(10, 2) NOT NULL,
+    fecha_emision DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_viaje) REFERENCES viajes(id_viaje)
+);
+
+
+-- Datos de ejemplo
+INSERT INTO rutas (nombre_ruta, descripcion) VALUES
+('Ruta 1', 'Ruta principal de la ciudad que conecta el norte con el sur'),
+('Ruta 2', 'Ruta que conecta el centro con el este de la ciudad'),
+('Ruta 3', 'Ruta que conecta el oeste con el norte');
+
+INSERT INTO estaciones (nombre_estacion, ubicacion) VALUES
+('Estación Central', 'Centro de la ciudad'),
+('Estación Norte', 'Zona norte de la ciudad'),
+('Estación Sur', 'Zona sur de la ciudad'),
+('Estación Este', 'Zona este de la ciudad'),
+('Estación Oeste', 'Zona oeste de la ciudad');
+
+INSERT INTO pasajeros (nombre, email, telefono) VALUES
+('Juan Pérez', 'juan.perez@gmail.com', '123456789'),
+('María Gómez', 'maria.gomez@gmail.com', '987654321'),
+('Carlos Ruiz', 'carlos.ruiz@gmail.com', '456789123');
+
+INSERT INTO viajes (id_pasajero, id_ruta, id_estacion_origen, id_estacion_destino) VALUES
+(1, 1, 1, 2),  -- Juan Pérez, Ruta 1, de Estación Central a Estación Norte
+(2, 2, 1, 4),  -- María Gómez, Ruta 2, de Estación Central a Estación Este
+(3, 3, 3, 5);  -- Carlos Ruiz, Ruta 3, de Estación Sur a Estación Oeste
+
+INSERT INTO tickets (id_viaje, precio) VALUES
+(1, 2.50),  -- Ticket para el viaje 1
+(2, 3.00),  -- Ticket para el viaje 2
+(3, 2.75);  -- Ticket para el viaje 3
+
+
+-- Consultas de ejemplo
+-- Obtener todos los viajes de un pasajero específico
+
+SELECT v.id_viaje, r.nombre_ruta, e1.nombre_estacion AS origen, e2.nombre_estacion AS destino, v.fecha_viaje
+FROM viajes v
+JOIN rutas r ON v.id_ruta = r.id_ruta
+JOIN estaciones e1 ON v.id_estacion_origen = e1.id_estacion
+JOIN estaciones e2 ON v.id_estacion_destino = e2.id_estacion
+WHERE v.id_pasajero = 1;  -- Cambiar el ID del pasajero
+
+-- Obtener todos los pasajeros que han viajado en una ruta específica
+
+SELECT p.nombre, p.email, p.telefono
+FROM pasajeros p
+JOIN viajes v ON p.id_pasajero = v.id_pasajero
+WHERE v.id_ruta = 1;  -- Cambiar el ID de la ruta
+
+--  Obtener los detalles de los tickets para un viaje específico
+
+SELECT t.id_ticket, t.precio, t.fecha_emision
+FROM tickets t
+JOIN viajes v ON t.id_viaje = v.id_viaje
+WHERE v.id_viaje = 1;  -- Cambiar el ID del viaje
+
+
+
+
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+
+/*
+    Crea una base de datos para un sistema de gestión de eventos, donde los asistentes
+    puedan registrarse para participar en distintas conferencias.
+*/
+
+CREATE DATABASE gestion_eventos;
+USE gestion_eventos;
+
+-- Tablas
+-- Tabla de asistentes
+CREATE TABLE asistentes (
+    id_asistente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    telefono VARCHAR(15),
+    fecha_registro DATE DEFAULT CURRENT_DATE
+);
+
+-- Tabla de eventos (conferencias)
+CREATE TABLE eventos (
+    id_evento INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    fecha_evento DATE,
+    hora_evento TIME,
+    id_ubicacion INT,
+    FOREIGN KEY (id_ubicacion) REFERENCES ubicaciones(id_ubicacion)
+);
+
+-- Tabla de ponentes
+CREATE TABLE ponentes (
+    id_ponente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    especialidad VARCHAR(255)
+);
+
+-- Tabla de ubicaciones
+CREATE TABLE ubicaciones (
+    id_ubicacion INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    direccion TEXT,
+    tipo VARCHAR(50) -- Ejemplo: "Auditorio", "Sala de reuniones", "En línea"
+);
+
+-- Tabla de registros (relaciona los asistentes con los eventos)
+CREATE TABLE registros (
+    id_registro INT AUTO_INCREMENT PRIMARY KEY,
+    id_asistente INT,
+    id_evento INT,
+    fecha_registro DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (id_asistente) REFERENCES asistentes(id_asistente),
+    FOREIGN KEY (id_evento) REFERENCES eventos(id_evento)
+);
+
+-- Tabla de ponentes_eventos (relaciona los ponentes con los eventos que presentan)
+CREATE TABLE ponentes_eventos (
+    id_evento INT,
+    id_ponente INT,
+    PRIMARY KEY (id_evento, id_ponente),
+    FOREIGN KEY (id_evento) REFERENCES eventos(id_evento),
+    FOREIGN KEY (id_ponente) REFERENCES ponentes(id_ponente)
+);
+
+-- Datos de ejemplo
+CREATE DATABASE gestion_eventos;
+USE gestion_eventos;
+
+-- Tabla de asistentes
+CREATE TABLE asistentes (
+    id_asistente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    telefono VARCHAR(15),
+    fecha_registro DATE DEFAULT CURRENT_DATE
+);
+
+-- Tabla de eventos (conferencias)
+CREATE TABLE eventos (
+    id_evento INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    fecha_evento DATE,
+    hora_evento TIME,
+    id_ubicacion INT,
+    FOREIGN KEY (id_ubicacion) REFERENCES ubicaciones(id_ubicacion)
+);
+
+-- Tabla de ponentes
+CREATE TABLE ponentes (
+    id_ponente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    especialidad VARCHAR(255)
+);
+
+-- Tabla de ubicaciones
+CREATE TABLE ubicaciones (
+    id_ubicacion INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    direccion TEXT,
+    tipo VARCHAR(50) -- Ejemplo: "Auditorio", "Sala de reuniones", "En línea"
+);
+
+-- Tabla de registros (relaciona los asistentes con los eventos)
+CREATE TABLE registros (
+    id_registro INT AUTO_INCREMENT PRIMARY KEY,
+    id_asistente INT,
+    id_evento INT,
+    fecha_registro DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (id_asistente) REFERENCES asistentes(id_asistente),
+    FOREIGN KEY (id_evento) REFERENCES eventos(id_evento)
+);
+
+-- Tabla de ponentes_eventos (relaciona los ponentes con los eventos que presentan)
+CREATE TABLE ponentes_eventos (
+    id_evento INT,
+    id_ponente INT,
+    PRIMARY KEY (id_evento, id_ponente),
+    FOREIGN KEY (id_evento) REFERENCES eventos(id_evento),
+    FOREIGN KEY (id_ponente) REFERENCES ponentes(id_ponente)
+);
+
+-- Consultas de ejemplo
+-- Obtener todos los eventos con su ubicación y ponentes:
+SELECT e.titulo AS "Evento", e.fecha_evento AS "Fecha", e.hora_evento AS "Hora", 
+       u.nombre AS "Ubicación", GROUP_CONCAT(p.nombre) AS "Ponentes"
+FROM eventos e
+JOIN ubicaciones u ON e.id_ubicacion = u.id_ubicacion
+JOIN ponentes_eventos pe ON e.id_evento = pe.id_evento
+JOIN ponentes p ON pe.id_ponente = p.id_ponente
+GROUP BY e.id_evento;
+
+-- Obtener los eventos en los que un asistente está registrado:
+SELECT a.nombre AS "Asistente", e.titulo AS "Evento", e.fecha_evento AS "Fecha", e.hora_evento AS "Hora"
+FROM registros r
+JOIN asistentes a ON r.id_asistente = a.id_asistente
+JOIN eventos e ON r.id_evento = e.id_evento
+WHERE a.id_asistente = 1;  -- Ejemplo: Asistente con ID = 1
+
+-- Obtener todos los asistentes registrados en un evento específico:
+SELECT e.titulo AS "Evento", a.nombre AS "Asistente", a.email AS "Email"
+FROM registros r
+JOIN eventos e ON r.id_evento = e.id_evento
+JOIN asistentes a ON r.id_asistente = a.id_asistente
+WHERE e.id_evento = 1;  -- Ejemplo: Evento con ID = 1
